@@ -1,13 +1,13 @@
-package Jeeseob.TimeCheck;
+package Study.TimeCheckProject;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TimeCheckApplication {
+public class TimeCheckProjectApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TimeCheckApplication.class, args);
+		SpringApplication.run(TimeCheckProjectApplication.class, args);
 	}
 
 }

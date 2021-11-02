@@ -1,10 +1,10 @@
-package Jeeseob.TimeCheck;
+package Study.TimeCheckProject;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TimeCheckApplicationTests {
+class TimeCheckProjectApplicationTests {
 
 	@Test
 	void contextLoads() {

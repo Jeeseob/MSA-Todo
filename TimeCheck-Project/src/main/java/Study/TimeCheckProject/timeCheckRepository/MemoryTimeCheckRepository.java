@@ -49,4 +49,9 @@ public class MemoryTimeCheckRepository implements TimeCheckRepository<TimeCheck>
     public ArrayList<TimeCheck> getAllTime() {
         return timeList;
     }
+
+    @Override
+    public TimeCheck getTimeCheck(LocalDate date) {
+        return timeList.get(timeList.size()-1);
+    }
 }

@@ -10,5 +10,6 @@ public interface TimeCheckRepository<T> {
     // 저장된 시간 반환
     LocalTime getTime(LocalDate date, boolean startEnd);
     ArrayList<T> getAllTime();
+    TimeCheck getTimeCheck(LocalDate date);
 
 }

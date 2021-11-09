@@ -19,4 +19,9 @@ public class MysqlTimeCheckRepository implements TimeCheckRepository{
     public ArrayList getAllTime() {
         return null;
     }
+
+    @Override
+    public TimeCheck getTimeCheck(LocalDate date) {
+        return null;
+    }
 }

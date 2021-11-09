@@ -15,9 +15,11 @@ import java.util.ArrayList;
 public class RESTApi {
     TimeCheckRepository timeCheckRepositroy = new MemoryTimeCheckRepository();
     @GetMapping("/start")
-    public LocalTime start() {
+    //public LocalTime start() {
+    public String start(){
         timeCheckRepositroy.setTime(true);
-        return timeCheckRepositroy.getTime(LocalDate.now(),true);
+        //return timeCheckRepositroy.getTime(LocalDate.now(),true);
+        return "Test";
     }
     @GetMapping("/end")
     public LocalTime end() {

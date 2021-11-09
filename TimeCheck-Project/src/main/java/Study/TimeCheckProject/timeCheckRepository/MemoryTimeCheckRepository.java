@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-public class MemoryTimeCheckRepository implements TimeCheckRepository{
+public class MemoryTimeCheckRepository implements TimeCheckRepository<TimeCheck>{
     ArrayList<TimeCheck> timeList;
 
     public MemoryTimeCheckRepository() {
@@ -14,18 +14,39 @@ public class MemoryTimeCheckRepository implements TimeCheckRepository{
     @Override
     public void setTime(boolean startEnd) {
         if (startEnd == true) {
-            timeList.add(new TimeCheck(LocalDate.now(),LocalTime.now()));
+            if(timeList.isEmpty()) {
+                timeList.add(new TimeCheck(LocalDate.now(), LocalTime.now()));
+            }
+            else {
+                LocalDate date = timeList.get(timeList.size() - 1).getDate();
+                if (LocalDate.now().isEqual(date)) {
+                } else {
+                    timeList.add(new TimeCheck(LocalDate.now(), LocalTime.now()));
+                }
+            }
         }
         else {
-            LocalDate date = timeList.get(timeList.size()).getDate();
+            LocalDate date = timeList.get(timeList.size()-1).getDate();
             if (LocalDate.now().isEqual(date)) {
-                timeList.get(timeList.size()).setEndTime(LocalTime.now());
+                timeList.get(timeList.size()-1).setEndTime(LocalTime.now());
             }
         }
     }
 
     @Override
     public LocalTime getTime(LocalDate date, boolean startEnd) {
-        return timeList.get(timeList.size()-1).getStartTime();
+        //이후에 LocalDate로 검색하는 형태로 변경
+        if (startEnd == true) {
+            return timeList.get(timeList.size() - 1).getStartTime();
+        }
+        else {
+            return  timeList.get(timeList.size() - 1).getEndTime();
+        }
+    }
+
+
+    @Override
+    public ArrayList<TimeCheck> getAllTime() {
+        return timeList;
     }
 }

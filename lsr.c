@@ -50,21 +50,23 @@ void lsRecursive(char * cwd) {
 
         // 하위 파일 갯수 파악을 위한 변수
         int count = 0;
-        // 하위 디렉토리 갯수
-        // 파악을 위한 변수
-        int dirCount = 0;
 
         // 입력받은 디렉토리의 하위 파일들 읽어와서 저장
         while((entry = readdir(dir)) != NULL) {
                 // 숨겨진 파일, 현재 디렉토리, 이전 디렉토리 숨김
                 if ((entry->d_name)[0]!='.'){
 
+                        //for (int i = 0; i<255;i++) {
                         files[count] = entry->d_name;
+                        //files[count] = entry->d_name;
                         count ++;
-                        if(entry->d_type == DT_DIR) {
-                                dirs[dirCount] = entry->d_name;
-                                dirCount++;
-                        }
+                        // if(entry->d_type == DT_DIR) {
+                        //         // for (int i = 0; i<255;i++) {
+                        //         strcpy(dirs[dirCount],(*entry).d_name);
+                        //         printf("%s\n",dirs[dirCount])
+                        //         //dirs[dirCount] = entry->d_name;
+                        //         dirCount++;
+                        // }
                 }
                 files[count] = NULL;
         }
@@ -74,49 +76,76 @@ void lsRecursive(char * cwd) {
                 return;
         }
 
-        // // 하위파일들을 파일명 기준으로 정렬(bubble sort)
-        // char tmp[256];
-        // for(int i=0; i<count-1; i++ ) {
-        //         for(int j=0; j<count-1-i; j++ ) {
-        //                 if( strcmp( files[j], files[j+1]) > 0 ) {
-        //                         strcpy( tmp, files[j] );
-        //                         strcpy( files[j], files[j+1]);
-        //                         strcpy( files[j+1], tmp );
-        //                 }
-        //         }
-        // }
-        // char dirTmp[256];
-        // for(int i=0; i<count-1; i++ ) {
-        //         for(int j=0; j<dirCount-1-i; j++ ) {
-        //                 if( strcmp( dirs[j], dirs[j+1]) > 0 ) {
-        //                         strcpy( dirTmp, dirs[j] );
-        //                         strcpy( dirs[j], dirs[j+1]);
-        //                         strcpy( dirs[j+1], dirTmp );
-        //                 }
-        //         }
-        // }
+        // 하위파일들을 파일명 기준으로 정렬(bubble sort)
+        char tmp[256];
+        for(int i=0; i<count-1; i++ ) {
+                for(int j=0; j<count-1-i; j++ ) {
+                        if( strcmp( files[j], files[j+1]) > 0 ) {
+                                strcpy( tmp, files[j] );
+                                strcpy( files[j], files[j+1]);
+                                strcpy( files[j+1], tmp );
+                        }
+                }
+        }
 
 
         //현재 디렉토리의 하위 파일들 출력하기
         int length = 0;
         int i = 0;
         while(files[i]!= NULL) {
-                length = length + strlen(files[i]);
-                // 현재까지 출력된 문자열의 길이가 일정 길이 이상인 경우, 개행문자로 줄 바꿈
-                // if (length > 20) {
-                //         printf("\n");
-                //         length = 0;
-                // }
+                if(sizeof(files[i]) < 8){
+                        length = length + 8;
+                }
+                else {
+                        length = length + sizeof(files[i]);
+                }
+                //현재까지 출력된 문자열의 길이가 일정 길이 이상인 경우, 개행문자로 줄 바꿈
+                if (length > 70) {
+                        printf("\n");
+                        length = 0;
+                }
                 //printf("%d", length);
                 printf("%s\t", files[i]);
                 i++;
         }
+        printf("\n\n");
 
-        printf("\n");
+        closedir(dir);
 
-        // length 초기화
-        length = 0;
-        printf("\n");
+        //디렉토리 를 받기 위해서...
+
+        // 입력받은 디렉토리 열기
+        if( (dir = opendir(cwd)) == NULL) {
+                // 디렉토리를 여는 중 문제 발생시 에러코드 출력
+                printf("current directory error\n");
+                exit(1);
+        }
+
+        // 하위 디렉토리 갯수 파악을 위한 변수
+        int dirCount = 0;
+
+        // 입력받은 디렉토리의 하위 파일들 읽어와서 저장
+        while((entry = readdir(dir)) != NULL) {
+                // 숨겨진 파일, 현재 디렉토리, 이전 디렉토리 숨김
+                if ((entry->d_name)[0]!='.'){
+                        if(entry->d_type == DT_DIR) {
+                                dirs[dirCount] = entry->d_name;
+                                dirCount++;
+                        }
+                }
+        }
+
+
+        char dirTmp[256];
+        for(int i=0; i<count-1; i++ ) {
+                for(int j=0; j<dirCount-1-i; j++ ) {
+                        if( strcmp( dirs[j], dirs[j+1]) > 0 ) {
+                                strcpy( dirTmp, dirs[j] );
+                                strcpy( dirs[j], dirs[j+1]);
+                                strcpy( dirs[j+1], dirTmp );
+                        }
+                }
+        }        
 
         char * cwdRecursive = (char *)malloc(sizeof(char) * 1024);
 

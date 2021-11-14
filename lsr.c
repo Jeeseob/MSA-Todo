@@ -11,21 +11,19 @@ int main(int argc, char *argv[]) {
         // 현재 경로를 입력받기 위한 변수(문자열)
         char cwd[1024] = ".";
         char * cwdFor = (char *)malloc(sizeof(char) * 1024);
-        printf("%d",argc);
 
         // 입력받은 경로가 없는 경우에는 현재 경로로 사용 
-        // 입력받은 경로 가 있는 경우 해당 경로를 cwd로 설정.
         if (argc == 1) {
                 lsRecursive(cwd);
         }
-        //함수실행 (현재 경로를 입력으로)
+
+        // 입력받은 경로 가 있는 경우 해당 경로를 cwd로 설정.
         else {
                 for (int i = 1; i < argc ;i++){
-                //현재 경로
                         strcpy(cwdFor,cwd);
                         strcat(cwdFor,"/");
                         strcat(cwdFor,argv[i]);
-                        //하위 디렉토리를 입력으로 재귀 호출
+                        // 입력받은 인자들을 입력으로 반복 호출
                         lsRecursive(cwdFor);
                 }
         }
@@ -46,10 +44,12 @@ void lsRecursive(char * cwd) {
         char * files[256];
         char * dirs[256];
 
-        // 입력받은 디렉토리 열기
+        // 입력받은 디렉토리 열기c
         if( (dir = opendir(cwd)) == NULL) {
                 // 디렉토리를 여는 중 문제 발생시 에러코드 출력
-                printf("current directory error\n");
+                printf("ls: ");
+                // 앞의 ./ 를 없애기 위해서 2byte 추가함.
+                perror(cwd+2);
                 exit(1);
         }
 
@@ -64,17 +64,9 @@ void lsRecursive(char * cwd) {
                 // 숨겨진 파일, 현재 디렉토리, 이전 디렉토리 숨김
                 if ((entry->d_name)[0]!='.'){
 
-                        //for (int i = 0; i<255;i++) {
                         files[count] = entry->d_name;
-                        //files[count] = entry->d_name;
                         count ++;
-                        // if(entry->d_type == DT_DIR) {
-                        //         // for (int i = 0; i<255;i++) {
-                        //         strcpy(dirs[dirCount],(*entry).d_name);
-                        //         printf("%s\n",dirs[dirCount])
-                        //         //dirs[dirCount] = entry->d_name;
-                        //         dirCount++;
-                        // }
+
                 }
                 files[count] = NULL;
         }
@@ -108,17 +100,17 @@ void lsRecursive(char * cwd) {
                         printf("\n");
                         length = 0;
                 }
-                //printf("%d", length);
                 printf("%s\t", files[i]);
                 i++;
         }
         printf("\n\n");
 
+
+        // dir을 새로 열기 위하여 close
         closedir(dir);
 
-        //디렉토리 를 받기 위해서...
 
-        // 입력받은 디렉토리 열기
+        // 현재 디렉토리 다시 열
         if( (dir = opendir(cwd)) == NULL) {
                 // 디렉토리를 여는 중 문제 발생시 에러코드 출력
                 printf("current directory error\n");
@@ -139,7 +131,7 @@ void lsRecursive(char * cwd) {
                 }
         }
 
-
+        // 하위디렉토리들을 파일명 기준으로 정렬(bubble sort)
         char dirTmp[256];
         for(int i=0; i<count-1; i++ ) {
                 for(int j=0; j<dirCount-1-i; j++ ) {
@@ -153,7 +145,7 @@ void lsRecursive(char * cwd) {
 
         char * cwdRecursive = (char *)malloc(sizeof(char) * 1024);
 
-        // -R 옵션 구현
+        // -R 옵션 구현 (재귀반복)
         for(int i=0; i<dirCount-1; i++ ) {
                 // 현재 경로 지정;
                 strcpy(cwdRecursive,cwd);
@@ -162,21 +154,9 @@ void lsRecursive(char * cwd) {
                 //하위 디렉토리를 입력으로 재귀 호출
                 lsRecursive(cwdRecursive);
         }
+        // 동적할당 해제
         free(cwdRecursive);
 
 }
 
 
-// 파일명을 최대 256자로 임의로 설정하였다.
-// 실제 유닉스의 최대 파일명이 버젼별로 다르다고 한다.
-// 예전엔 14byte였고, 현재는 대부분 최대 256자라고 한다.
-// 동적할당을 받는다면 메모리를 더 아낄 수 있을 것 같다.
-
-// 출력시 정렬방식이 의문이다. 기본적으로 알파벳 순서 + 길이와 관련된 것 같은데 명확하지 않았다.
-// 때문에 우선 단순 알파벳 순으로 구현
-
-// 파일 속성에 따라 색상이 달라진다.
-// cmd에서 글 색상이 다르게 출력하는 방법을 찾아봐야 겠다.
-
-// Error 코드를 많이 작성하여, 문제 발생을 줄여야 하지만, 
-// 아직 Error 코드를 적재적소에 넣는 것을 생각해내기가 힘들다. test는 여러번 진행해 봤지만, 예상치 못한 오류가 발생할 수 있을 것 같다.

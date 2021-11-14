@@ -46,9 +46,8 @@ void lsRecursive(char * cwd) {
         }
 
         //현재 디렉토리의 경로 출력하기
-        printf("%s\n",cwd);
+        printf("%s:\n",cwd);
 
-        printf("test\n");
         // 하위 파일 갯수 파악을 위한 변수
         int count = 0;
         // 하위 디렉토리 갯수
@@ -60,51 +59,42 @@ void lsRecursive(char * cwd) {
                 // 숨겨진 파일, 현재 디렉토리, 이전 디렉토리 숨김
                 if ((entry->d_name)[0]!='.'){
 
-                        strcpy(files[count],(entry->d_name));
-                        // 읽어드린 파일이 디렉토리라면, 따로 저장하여 Recursive에 활용
-                        if (entry->d_type == DT_DIR){
-                                strcpy(dirs[dirCount],(entry->d_name));
-                                dirCount ++;
-                                dirs[dirCount] = NULL;
-                        }
-                        // 수정
+                        files[count] = entry->d_name;
                         count ++;
+                        if(entry->d_type == DT_DIR) {
+                                dirs[dirCount] = entry->d_name;
+                                dirCount++;
+                        }
                 }
                 files[count] = NULL;
         }
 
         if(count == 0) {
+                printf("\n");
                 return;
         }
 
-        // 하위파일들을 파일명 기준으로 정렬(bubble sort)
-        char tmp[256];
-        for(int i=0; i<count-1; i++ ) {
-                for(int j=0; j<count-1-i; j++ ) {
-                        if( strcmp( files[j], files[j+1]) > 0 ) {
-                                strcpy( tmp, files[j] );
-                                strcpy( files[j], files[j+1]);
-                                strcpy( files[j+1], tmp );
-                        }
-                }
-        }
-
-        char tmpDir[256];
-        for(int i=0; i<dirCount-1; i++ ) {
-                for(int j=0; j<dirCount-1-i; j++ ) {
-                        if( strcmp( dirs[j], dirs[j+1]) > 0 ) {
-                                strcpy( tmpDir, dirs[j] );
-                                strcpy( dirs[j], dirs[j+1]);
-                                strcpy( dirs[j+1], tmpDir );
-                        }
-                }
-        }
-
-        printf("-------------\n");
-        for(int i=0; i<dirCount; i++ ){
-                printf("%s\n",dirs[i]);
-        }
-        printf("-------------\n");
+        // // 하위파일들을 파일명 기준으로 정렬(bubble sort)
+        // char tmp[256];
+        // for(int i=0; i<count-1; i++ ) {
+        //         for(int j=0; j<count-1-i; j++ ) {
+        //                 if( strcmp( files[j], files[j+1]) > 0 ) {
+        //                         strcpy( tmp, files[j] );
+        //                         strcpy( files[j], files[j+1]);
+        //                         strcpy( files[j+1], tmp );
+        //                 }
+        //         }
+        // }
+        // char dirTmp[256];
+        // for(int i=0; i<count-1; i++ ) {
+        //         for(int j=0; j<dirCount-1-i; j++ ) {
+        //                 if( strcmp( dirs[j], dirs[j+1]) > 0 ) {
+        //                         strcpy( dirTmp, dirs[j] );
+        //                         strcpy( dirs[j], dirs[j+1]);
+        //                         strcpy( dirs[j+1], dirTmp );
+        //                 }
+        //         }
+        // }
 
 
         //현재 디렉토리의 하위 파일들 출력하기
@@ -121,6 +111,9 @@ void lsRecursive(char * cwd) {
                 printf("%s\t", files[i]);
                 i++;
         }
+
+        printf("\n");
+
         // length 초기화
         length = 0;
         printf("\n");
@@ -129,7 +122,7 @@ void lsRecursive(char * cwd) {
 
         // -R 옵션 구현
         for(int i=0; i<dirCount-1; i++ ) {
-                // 현재 경로 지저;
+                // 현재 경로 지정;
                 strcpy(cwdRecursive,cwd);
                 strcat(cwdRecursive,"/");
                 strcat(cwdRecursive,dirs[i]);

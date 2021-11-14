@@ -9,11 +9,10 @@ void lsRecursive(char * cwd);
 int main(int argc, char *argv[]) {
 
         // 현재 경로를 입력받기 위한 변수(문자열)
-        char cwd[1024] = "./";
+        char cwd[1024] = ".";
 
         // 입력받은 경로가 없는 경우에는 현재 경로로 사용 
         // 입력받은 경로 가 있는 경우 해당 경로를 cwd로 설정.
-  
         if (argv[1] != NULL) {
                 //현재 경로
                 strcat(cwd,argv[1]);
@@ -22,9 +21,6 @@ int main(int argc, char *argv[]) {
 
         //함수실행 (현재 경로를 입력으로)
         lsRecursive(cwd);
-
-        free(cwd);
-
         return 0;
 
 }
@@ -40,7 +36,7 @@ void lsRecursive(char * cwd) {
         // 파일명 저장을 위한 문자열 배열 
         // 유닉스는 현재 대부분 최대 파일명을 255자로 제한하고 있어서 256으로 
         char * files[256];
-
+        char * dirs[256];
 
         // 입력받은 디렉토리 열기
         if( (dir = opendir(cwd)) == NULL) {
@@ -48,24 +44,37 @@ void lsRecursive(char * cwd) {
                 printf("current directory error\n");
                 exit(1);
         }
-        
+
         //현재 디렉토리의 경로 출력하기
         printf("%s\n",cwd);
 
+        printf("test\n");
         // 하위 파일 갯수 파악을 위한 변수
         int count = 0;
+        // 하위 디렉토리 갯수
+        // 파악을 위한 변수
+        int dirCount = 0;
 
         // 입력받은 디렉토리의 하위 파일들 읽어와서 저장
         while((entry = readdir(dir)) != NULL) {
                 // 숨겨진 파일, 현재 디렉토리, 이전 디렉토리 숨김
                 if ((entry->d_name)[0]!='.'){
-                       
-                        // 이부분 
-                        files[count] = entry->d_name;
+
+                        strcpy(files[count],(entry.d_name));
+                        // 읽어드린 파일이 디렉토리라면, 따로 저장하여 Recursive에 활용
+                        if (entry->d_type == DT_DIR){
+                                strcpy(dirs[dirCount],(entry.d_name));
+                                dirCount ++;
+                                dirs[dirCount] = NULL;
+                        }
                         // 수정
                         count ++;
                 }
                 files[count] = NULL;
+        }
+
+        if(count == 0) {
+                return;
         }
 
         // 하위파일들을 파일명 기준으로 정렬(bubble sort)
@@ -80,6 +89,23 @@ void lsRecursive(char * cwd) {
                 }
         }
 
+        char tmpDir[256];
+        for(int i=0; i<dirCount-1; i++ ) {
+                for(int j=0; j<dirCount-1-i; j++ ) {
+                        if( strcmp( dirs[j], dirs[j+1]) > 0 ) {
+                                strcpy( tmpDir, dirs[j] );
+                                strcpy( dirs[j], dirs[j+1]);
+                                strcpy( dirs[j+1], tmpDir );
+                        }
+                }
+        }
+
+        printf("-------------\n");
+        for(int i=0; i<dirCount; i++ ){
+                printf("%s\n",dirs[i]);
+        }
+        printf("-------------\n");
+
 
         //현재 디렉토리의 하위 파일들 출력하기
         int length = 0;
@@ -87,10 +113,10 @@ void lsRecursive(char * cwd) {
         while(files[i]!= NULL) {
                 length = length + strlen(files[i]);
                 // 현재까지 출력된 문자열의 길이가 일정 길이 이상인 경우, 개행문자로 줄 바꿈
-                if (length > 20) {
-                        printf("\n");
-                        length = 0;
-                }
+                // if (length > 20) {
+                //         printf("\n");
+                //         length = 0;
+                // }
                 //printf("%d", length);
                 printf("%s\t", files[i]);
                 i++;
@@ -99,18 +125,21 @@ void lsRecursive(char * cwd) {
         length = 0;
         printf("\n");
 
+        char * cwdRecursive = (char *)malloc(sizeof(char) * 1024);
 
-        // // -R 옵션 구현
-        // whie(현재디렉토리의 하위 디렉토리) {
-        //         // 파일이 디렉토리인 경우 함수 실행
-        //         if(디렉토리인 경우) {
-        //                 //하위 디렉토리를 입력으로 재귀 호출
-        //                 lsRecursive(디렉토리 경로);
-        //                 free(디렉토리 경로);
-        //                 closedir(디렉토리 경);
-        //         }
-        // }
+        // -R 옵션 구현
+        for(int i=0; i<dirCount-1; i++ ) {
+                // 현재 경로 지저;
+                strcpy(cwdRecursive,cwd);
+                strcat(cwdRecursive,"/");
+                strcat(cwdRecursive,dirs[i]);
+                //하위 디렉토리를 입력으로 재귀 호출
+                lsRecursive(cwdRecursive);
+        }
+        free(cwdRecursive);
+
 }
+
 
 // 파일명을 최대 256자로 임의로 설정하였다.
 // 실제 유닉스의 최대 파일명이 버젼별로 다르다고 한다.

@@ -50,7 +50,7 @@ void lsRecursive(char * cwd) {
                 printf("ls: ");
                 // 앞의 ./ 를 없애기 위해서 2byte 추가함.
                 perror(cwd+2);
-                exit(1);
+                return;
         }
 
         //현재 디렉토리의 경로 출력하기
@@ -113,8 +113,9 @@ void lsRecursive(char * cwd) {
         // 현재 디렉토리 다시 열
         if( (dir = opendir(cwd)) == NULL) {
                 // 디렉토리를 여는 중 문제 발생시 에러코드 출력
-                printf("current directory error\n");
-                exit(1);
+                // 앞에서 열었는데, 이번에는 안열리는 경우라서, 에러코드를 다르게 설정하기 위해 임의로 에러코드를 출력하였습니다.
+                printf("directory error\n");
+                return;
         }
 
         // 하위 디렉토리 갯수 파악을 위한 변수

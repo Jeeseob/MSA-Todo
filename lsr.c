@@ -60,10 +60,10 @@ void lsRecursive(char * cwd) {
                 // 숨겨진 파일, 현재 디렉토리, 이전 디렉토리 숨김
                 if ((entry->d_name)[0]!='.'){
 
-                        strcpy(files[count],(entry.d_name));
+                        strcpy(files[count],(entry->d_name));
                         // 읽어드린 파일이 디렉토리라면, 따로 저장하여 Recursive에 활용
                         if (entry->d_type == DT_DIR){
-                                strcpy(dirs[dirCount],(entry.d_name));
+                                strcpy(dirs[dirCount],(entry->d_name));
                                 dirCount ++;
                                 dirs[dirCount] = NULL;
                         }

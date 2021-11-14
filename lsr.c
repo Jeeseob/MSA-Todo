@@ -10,17 +10,25 @@ int main(int argc, char *argv[]) {
 
         // 현재 경로를 입력받기 위한 변수(문자열)
         char cwd[1024] = ".";
+        char * cwdFor = (char *)malloc(sizeof(char) * 1024);
+        printf("%d",argc);
 
         // 입력받은 경로가 없는 경우에는 현재 경로로 사용 
         // 입력받은 경로 가 있는 경우 해당 경로를 cwd로 설정.
-        if (argv[1] != NULL) {
-                //현재 경로
-                strcat(cwd,argv[1]);
-                printf("%s\n",argv[1]);
-       }
-
+        if (argc == 1) {
+                lsRecursive(cwd);
+        }
         //함수실행 (현재 경로를 입력으로)
-        lsRecursive(cwd);
+        else {
+                for (int i = 1; i < argc ;i++){
+                //현재 경로
+                        strcpy(cwdFor,cwd);
+                        strcat(cwdFor,"/");
+                        strcat(cwdFor,argv[i]);
+                        //하위 디렉토리를 입력으로 재귀 호출
+                        lsRecursive(cwdFor);
+                }
+        }
         return 0;
 
 }
@@ -93,14 +101,10 @@ void lsRecursive(char * cwd) {
         int length = 0;
         int i = 0;
         while(files[i]!= NULL) {
-                if(sizeof(files[i]) < 8){
-                        length = length + 8;
-                }
-                else {
-                        length = length + sizeof(files[i]);
-                }
+                length = length + 8;
+
                 //현재까지 출력된 문자열의 길이가 일정 길이 이상인 경우, 개행문자로 줄 바꿈
-                if (length > 70) {
+                if (length > 76) {
                         printf("\n");
                         length = 0;
                 }

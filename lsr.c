@@ -4,9 +4,12 @@
 #include<unistd.h>
 #include<string.h>
 
+extern int errno;
+
 void lsRecursive(char * cwd);
 
 int main(int argc, char *argv[]) {
+
 
         // 현재 경로를 입력받기 위한 변수(문자열)
         char cwd[1024] = ".";
@@ -17,14 +20,22 @@ int main(int argc, char *argv[]) {
                 lsRecursive(cwd);
         }
 
+
         // 입력받은 경로 가 있는 경우 해당 경로를 cwd로 설정.
         else {
                 for (int i = 1; i < argc ;i++){
-                        strcpy(cwdFor,cwd);
-                        strcat(cwdFor,"/");
-                        strcat(cwdFor,argv[i]);
-                        // 입력받은 인자들을 입력으로 반복 호출
-                        lsRecursive(cwdFor);
+
+                        // 홈디렉토리에서 부터 절대경로로 시작되는 경우
+                        if(argv[i][0] == '/') {
+                                lsRecursive(argv[i]);  
+                        }
+                        else {
+                                strcpy(cwdFor,cwd);
+                                strcat(cwdFor,"/");
+                                strcat(cwdFor,argv[i]);
+                                // 입력받은 인자들을 입력으로 반복 호출
+                                lsRecursive(cwdFor);
+                        }
                 }
         }
         return 0;
@@ -44,12 +55,14 @@ void lsRecursive(char * cwd) {
         char * files[256];
         char * dirs[256];
 
+        char * err;
+
         // 입력받은 디렉토리 열기c
         if( (dir = opendir(cwd)) == NULL) {
                 // 디렉토리를 여는 중 문제 발생시 에러코드 출력
-                printf("ls: ");
+                err = strerror(errno);
+                printf("ls: %s: %s\n", cwd+2, err);
                 // 앞의 ./ 를 없애기 위해서 2byte 추가함.
-                perror(cwd+2);
                 return;
         }
 

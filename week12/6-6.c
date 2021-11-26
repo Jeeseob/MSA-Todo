@@ -5,37 +5,23 @@
 
 
 
-
-void handler(int signo)
-{
-	// Signal 입력시 실행 (signal 관련 정보 출력)
-	psignal(signo, "Received Signal:");
-	sleep(5);
-	printf("In Signal Handler, After Sleep\n");
-}
-
 int main(void)
 {
 
-	struct sigaction act;
-
-	sigemptyset(&act.sa_mask);
-	act.sa_flags = 0;
-	// signal 처리 handler를 hnadler 함수로 지정
-	act.sa_handler = handler;
-
-	if(sigaction(SIGINT, &act, (struct sigaction *)NULL)  < 0)
-	{
-		// 오류 발생시 에러 메세지 출력
-		perror("sigaction");
-		exit(1);
-	}
+	// SIGINT(ctrl + c)입력시 SIG_IGN(시그널 무시)로 변경하여 처
+	if(sigset(SIGINT, SIG_IGN) == SIG_ERR)
+		{
+			// 오류 발생시 에러 메세지 출력
+			perror("sigset");
+			exit(1);
+		}
 
 	int i;
-	// 출력문을 찍고 1초 쉰다.
+	// 10번 반복
 	for(i = 0; i < 10; i++)
 	{
 		printf("sleep 1 second...\n");
+		// 1초 대기 (입력을 받기 위해서)
 		sleep(1);
 	}	
 	return 0;

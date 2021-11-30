@@ -7,7 +7,7 @@ int main(void)
 	for(i = 0; i < 10; i++)
 	{
 		printf("sleep 1 second...\n");
-		// 1초 대
+		// 1초 대기
 		sleep(1);
 	}	
 	return 0;

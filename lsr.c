@@ -3,7 +3,6 @@
 #include<dirent.h>
 #include<unistd.h>
 #include<string.h>
-#include </usr/include/errno.h>
 
 extern int errno;
 

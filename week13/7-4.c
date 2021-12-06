@@ -32,8 +32,8 @@ int main(void)
 
 		// 자식 프로세스인 경우 실행
 		case 0:
-			// 파이프 read에서 데이터를 읽어오
-			len = read(pd[0], buf, BUFSIZ);다
+			// 파이프 read에서 데이터를 읽어오기
+			len = read(pd[0], buf, BUFSIZ);
 			printf("%d read '%s' from the pipe.\n", (int)getpid(), buf);
 			break;			
 	}

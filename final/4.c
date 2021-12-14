@@ -42,7 +42,7 @@ int main(void)
                 dup2(pd[0], 0);
            		close(pd[0]);
             }
-           	execlp("grep", "grep", "3", (char *)NULL);
+           	execlp("grep", "grep", "c", (char *)NULL);
             wait(NULL);
             break;
     	}

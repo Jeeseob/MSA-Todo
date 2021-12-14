@@ -41,7 +41,8 @@ int main(int argc, char *argv[])
 
 
 
-    	if (send(sd, message, strlen(message) + 1, 0) == -1) {
+    	buf = "test";
+    	if (send(sd, buf, strlen(buf) + 1, 0) == -1) {
 	        perror("send");
 	        exit(1);
 		}

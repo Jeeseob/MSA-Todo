@@ -31,18 +31,19 @@ int main(void)
                	close(pd[1]);
             }	
             execlp("ls", "ls", "-l", (char *)NULL);
-            wait(NULL);
+            exit(1);
             break;
 
         // 부모일 때 실행
         default : 
+        	// 사용하지 않는 
        		close(pd[1]);
             if (pd[0] != 0) {
                 dup2(pd[0], 0);
            		close(pd[0]);
             }
-           	execlp("grep", "grep", "c", (char *)NULL);
-            exit(1);
+           	execlp("grep", "grep", "3", (char *)NULL);
+            wait(NULL);
             break;
     	}
 

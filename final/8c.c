@@ -15,10 +15,10 @@ int main(int argc, char *argv[])
     	struct sockaddr_in sin;
 
 
-    	char * message;
+    	char message[256];
 
     	sprintf(buf, argv[1]);
-    	
+
     	for (int i = 2; i< argc; i++) {
                 strcat(message,argv[i]);
                 strcat(message," ");

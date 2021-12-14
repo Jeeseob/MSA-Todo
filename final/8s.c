@@ -46,16 +46,21 @@ int main(void)
         switch (fork()) {
 
             case 0:
-       //         	while (input[count]) {
-       // 				if (isupper(input[count])){
-       //      			input[count] = tolower(input[count]);
-       // 				}
-       //  			else if (islower(input[count])){
-       //      			input[count] = toupper(input[count]);
-       // 				}
-       //  		count++;
-    			// }
-	            sprintf(buf, "Your IP address is %s", inet_ntoa(cli.sin_addr));
+            	
+            	if (recv(sd, buf, sizeof(buf), 0) == -1) {
+        			perror("recv");
+        			exit(1);
+    			}
+
+               	while (buf[count]) {
+       				if (isupper(buf[count])){
+            			buf[count] = tolower(buf[count]);
+       				}
+        			else if (islower(buf[count])){
+            			buf[count] = toupper(buf[count]);
+       				}
+        		count++;
+    			}
 		    	if (send(ns, buf, strlen(buf) + 1, 0) == -1) {
 		        	perror("send");
 		        	exit(1);

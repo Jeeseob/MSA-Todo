@@ -79,9 +79,6 @@ int semunlock(int semid)
 }
 
 
-
-
-
 unsigned int s = 0;
 
 //pthread의 상호배제 기능을 사용해서 
@@ -97,8 +94,6 @@ void *c(void *d) {
 
     	if ((semid = initsem(1)) < 0)
         	exit(1);
-
-
 
 
     semlock(semid);	

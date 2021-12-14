@@ -48,12 +48,12 @@ int main(void)
 
             case 0:
             	
-            	if (recv(sd, buf, sizeof(buf), 0) == -1) {
+            	if (recv(ns, buf, sizeof(buf), 0) == -1) {
         			perror("recv");
         			exit(1);
     			}
     			count = 0;
-               	while (buf[count]) {
+               	while (buf[count] != '\0') {
        				if (isupper(buf[count])){
             			buf[count] = tolower(buf[count]);
        				}
@@ -62,6 +62,7 @@ int main(void)
        				}
         			count++;
     				}
+
 		    	if (send(ns, buf, strlen(buf) + 1, 0) == -1) {
 		        	perror("send");
 		        	exit(1);

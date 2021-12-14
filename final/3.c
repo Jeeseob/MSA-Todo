@@ -13,11 +13,11 @@
 #define N 100000000
 
 
-// union semun {
-//     int val;
-//     struct semid_ds *buf;
-//     unsigned short *array;
-// };
+union semun {
+    int val;
+    struct semid_ds *buf;
+    unsigned short *array;
+};
 
 
 int initsem(key_t semkey) 

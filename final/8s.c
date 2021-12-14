@@ -27,14 +27,12 @@ int main(void)
     	sin.sin_port = htons(PORTNUM);
     	sin.sin_addr.s_addr = inet_addr("127.0.0.1");
 
-    	if (bind(sd, (struct sockaddr *)&sin, sizeof(sin))) 
-	{
+    	if (bind(sd, (struct sockaddr *)&sin, sizeof(sin))) {
         	perror("bind");
         	exit(1);
     	}
 
-    	if (listen(sd, 5)) 
-	{
+    	if (listen(sd, 5)) {
         	perror("listen");
         	exit(1);
     	}
@@ -57,8 +55,12 @@ int main(void)
        // 				}
        //  		count++;
     			// }
-            printf("test\n");
-
+	            sprintf(buf, "Your IP address is %s", inet_ntoa(cli.sin_addr));
+		    	if (send(ns, buf, strlen(buf) + 1, 0) == -1) {
+		        	perror("send");
+		        	exit(1);
+		    		}
+          
         }
     close(ns);
     }	

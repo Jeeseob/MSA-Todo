@@ -1,3 +1,6 @@
+// glib 를 사용하여 구현하였습니다. 
+// 컴파일시에 gcc -o 6 6.c 'pkg-config glib-2.0 --cflags --libs'으로 컴파일 하여야 정상 실행 됩니다.
+
 #include <stdlib.h>  
 #include <stdio.h>  
 #include <string.h>

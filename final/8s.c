@@ -67,9 +67,9 @@ int main(void)
 		        	perror("send");
 		        	exit(1);
 		    		}
+		    	close(ns);
           
         }
-    close(ns);
     }	
 
     	return 0;

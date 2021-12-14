@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
         while (!g_queue_is_empty(queue)) {
                 printf("%s\t", (char*)g_queue_pop_tail(queue));
         }
-        printf("\n");
+        printf("\n\n");
 
 
         printf("Stack Order\n");
@@ -53,11 +53,11 @@ int main(int argc, char *argv[])
                 printf("%s\t", (char*)g_queue_pop_head(queue));
         }
 
-        printf("\n");
+        printf("\n\n");
 
         GPtrArray* array = g_ptr_array_new();
 
-        // 배열에 데이터 입력
+        // 배열에 데이터 입
         for(i=1; i<argc; i++) {
                 g_ptr_array_add(array,argv[i]);
         }
@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
 
         // 배열에 있는 값을 하나씩 출력
         g_ptr_array_foreach(array,print,NULL);        
-        printf("\n");
+        printf("\n\n");
 
 
         printf("reverse Alphabetical Order\n");

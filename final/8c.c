@@ -20,12 +20,11 @@ int main(int argc, char *argv[])
     	sprintf(message, argv[1]);
 
     	for (int i = 2; i< argc; i++) {
+    			strcat(message," ");
                 strcat(message,argv[i]);
-                strcat(message," ");
         } 
 
-    	if ((sd = socket(AF_INET, SOCK_STREAM, 0)) == -1) 
-	{
+    	if ((sd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
         	perror("socket");
         	exit(1);
     	}
@@ -35,8 +34,7 @@ int main(int argc, char *argv[])
     	sin.sin_port = htons(PORTNUM);
     	sin.sin_addr.s_addr = inet_addr("127.0.0.1");
 
-    	if (connect(sd, (struct sockaddr *)&sin, sizeof(sin))) 
-	{
+    	if (connect(sd, (struct sockaddr *)&sin, sizeof(sin))) {
         	perror("connect");
         	exit(1);
     	}

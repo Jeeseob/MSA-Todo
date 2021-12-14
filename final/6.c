@@ -1,7 +1,21 @@
-//6.c
+#include <stdlib.h>  
+#include <stdio.h>  
+#include <glib.h>
 
-argument로 받은 값을 들어온 순서대로, 들어온 순서의 역순으로, 알파벳 순서로, 알파벳 역순으로 출력
 
-가장 쉬운 방법은 라이브러리를 활용하는 것이다.
+int main(int argc, char *argv[])  
+{  
+        int i;  
+        
+        GQueue* queue = g_queue_new();
 
-g libary
+        for (i = 0; i< argc; i++) {
+                g_queue_push_head(queue, argv[i]);
+        }  
+
+        while (!g_queue_is_empty(queue)) {
+                printf("%s\n", (char*)g_queue_pop_tail(queue));
+        }
+
+        exit(0);  
+}  

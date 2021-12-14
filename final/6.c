@@ -47,10 +47,10 @@ int main(int argc, char *argv[])
 
         printf("\n");
 
-        GPtArray* array = g_ptr_array_new();
+        GptArray* array = g_ptr_array_new();
 
         for(i=0; i<argc; i++) {
-                g_ptr_array_add(array,argb[i]);
+                g_ptr_array_add(array,argv[i]);
         }
         g_ptr_array_sort(array,compare);
 

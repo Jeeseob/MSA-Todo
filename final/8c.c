@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 
     	char message[256];
 
-    	sprintf(message, argv[1]);
+    	sprintf(message,"%s", argv[1]);
 
     	for (int i = 2; i< argc; i++) {
     			strcat(message," ");
@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 
 
 
-    	sprintf(buf, message);
+    	sprintf(buf, "%s", message);
     	if (send(sd, buf, strlen(buf) + 1, 0) == -1) {
 	        perror("send");
 	        exit(1);

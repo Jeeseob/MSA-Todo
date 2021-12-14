@@ -17,7 +17,9 @@ int main(int argc, char *argv[])
 
     	char * message;
 
-    	for (int i = 1; i< argc; i++) {
+    	sprintf(buf, argv[1]);
+    	
+    	for (int i = 2; i< argc; i++) {
                 strcat(message,argv[i]);
                 strcat(message," ");
         } 

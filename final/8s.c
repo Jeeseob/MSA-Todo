@@ -53,15 +53,15 @@ int main(void)
         			exit(1);
     			}
     			count = 0;
-               	while (buf[count] != '\0') {
-       				if (isupper(buf[count])){
-            			buf[count] = tolower(buf[count]);
-       				}
-        			else if (islower(buf[count])){
-            			buf[count] = toupper(buf[count]);
-       				}
-        			count++;
-    				}
+        //        	while (buf[count] != '\0') {
+       	// 			if (isupper(buf[count])){
+        //     			buf[count] = tolower(buf[count]);
+       	// 			}
+        // 			else if (islower(buf[count])){
+        //     			buf[count] = toupper(buf[count]);
+       	// 			}
+        // 			count++;
+    				// }
 
 		    	if (send(ns, buf, strlen(buf) + 1, 0) == -1) {
 		        	perror("send");

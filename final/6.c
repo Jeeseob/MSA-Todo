@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
         printf("Queue Order\n");
         GQueue* queue = g_queue_new();
 
-        for (i = 0; i< argc; i++) {
+        for (i = 1; i< argc; i++) {
                 g_queue_push_head(queue, argv[i]);
         }  
 
@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 
         printf("Stack Order\n");
         
-        for (i = 0; i< argc; i++) {
+        for (i = 1; i< argc; i++) {
                 g_queue_push_head(queue, argv[i]);
         } 
 
@@ -49,20 +49,22 @@ int main(int argc, char *argv[])
 
         GPtrArray* array = g_ptr_array_new();
 
-        for(i=0; i<argc; i++) {
+        for(i=1; i<argc; i++) {
                 g_ptr_array_add(array,argv[i]);
         }
+
+        printf("Alphabetical Order\n");
         g_ptr_array_sort(array,compare);
 
         g_ptr_array_foreach(array,print,NULL);        
+        printf("\n");
 
 
-
-
+        printf("reverse Alphabetical Order\n");
         g_ptr_array_sort(array,compare2);
 
         g_ptr_array_foreach(array,print,NULL); 
-
+        printf("\n");
 
 
         exit(0);  

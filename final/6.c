@@ -14,11 +14,8 @@ gint compare(gconstpointer a, gconstpointer b) {
         return (gint)strcmp(*(const char **)a, *(const char**)b);
 }
 
-gint reverse_compare(gconstpointer a, gconstpointer b){
-    StructInfo* x = (StructInfo *)a;
-    StructInfo* y = (StructInfo *)b;
-
-    return (y->nValue1 - x->nValue1);
+gint reverse_compare(gconstpointer a, gconstpointer b) {
+  return (gint)strcmp(*(const char **)b, *(const char**)a);
 }
 
 int main(int argc, char *argv[])  
@@ -64,7 +61,7 @@ int main(int argc, char *argv[])
 
 
         printf("reverse Alphabetical Order\n");
-        g_ptr_array_sort(array,compare2);
+        g_ptr_array_sort(array,reverse_compare);
 
         g_ptr_array_foreach(array,print,NULL); 
         printf("\n");

@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 
 
 
-    	sprintf(buf, "bufTEST");
+    	sprintf(buf, message);
     	if (send(sd, buf, strlen(buf) + 1, 0) == -1) {
 	        perror("send");
 	        exit(1);

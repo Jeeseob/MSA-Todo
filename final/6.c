@@ -10,11 +10,11 @@ void print(gpointer data, gpointer userdata) {
         printf("%s\t", (char*)data);
 }
 
-void compare(gconstpointer a, gconstpointer b) {
+gint compare(gconstpointer a, gconstpointer b) {
         return (gint)strcmp(*(const char **)a, *(const char**)b);
 }
 
-void compare2(gconstpointer a, gconstpointer b) {
+gint compare2(gconstpointer a, gconstpointer b) {
         return (gint)strcmp(*(const char **)a, *(const char**)b);
 }
 

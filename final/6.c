@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
 
         printf("\n");
 
-        GptArray* array = g_ptr_array_new();
+        GPtrArray* array = g_ptr_array_new();
 
         for(i=0; i<argc; i++) {
                 g_ptr_array_add(array,argv[i]);

@@ -16,6 +16,7 @@ void handler(int signo)
 int mina(void) {
 
 
+
 	struct sigaction act;
 
     	sigemptyset(&act.sa_mask);
@@ -28,19 +29,12 @@ int mina(void) {
         	exit(1);
     	}
 
-    	fprintf(stderr, "Input SIGINT: ");
-    	pause();
-    	fprintf(stderr, "After Signal Handler\n");
+	short i = 0;
 
-    	return 0;
-
-
-	// short i = 0;
-
-	// while(1) {
-	// 		if(i<0)
-	// 			i = 0;
-	// 		printf("%d\r",i++);
-	// }
-	// return 0;
+	while(1) {
+			if(i<0)
+				i = 0;
+			printf("%d\r",i++);
+	}
+	return 0;
 }

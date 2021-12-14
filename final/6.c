@@ -14,8 +14,11 @@ gint compare(gconstpointer a, gconstpointer b) {
         return (gint)strcmp(*(const char **)a, *(const char**)b);
 }
 
-gint compare2(gconstpointer a, gconstpointer b) {
-        return (gint)strcmp(*(const char **)a, *(const char**)b);
+gint reverse_compare(gconstpointer a, gconstpointer b){
+    StructInfo* x = (StructInfo *)a;
+    StructInfo* y = (StructInfo *)b;
+
+    return (y->nValue1 - x->nValue1);
 }
 
 int main(int argc, char *argv[])  

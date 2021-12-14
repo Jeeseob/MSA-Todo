@@ -11,7 +11,8 @@
 #define PORTNUM 9000
 
 int main(void) 
-{
+{	
+		int count;
     	char buf[256];
     	struct sockaddr_in sin, cli;
     	int sd, ns, clientlen = sizeof(cli);
@@ -51,7 +52,7 @@ int main(void)
         			perror("recv");
         			exit(1);
     			}
-
+    			count = 0;
                	while (buf[count]) {
        				if (isupper(buf[count])){
             			buf[count] = tolower(buf[count]);
@@ -59,8 +60,8 @@ int main(void)
         			else if (islower(buf[count])){
             			buf[count] = toupper(buf[count]);
        				}
-        		count++;
-    			}
+        			count++;
+    				}
 		    	if (send(ns, buf, strlen(buf) + 1, 0) == -1) {
 		        	perror("send");
 		        	exit(1);

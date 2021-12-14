@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 
     	char * message;
 
-    	for (i = 1; i< argc; i++) {
+    	for (int i = 1; i< argc; i++) {
                 strcat(message,argv[i]);
                 strcat(message," ");
         } 
@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 
 
 
-    	if (send(ns, message, strlen(message) + 1, 0) == -1) {
+    	if (send(sd, message, strlen(message) + 1, 0) == -1) {
 	        perror("send");
 	        exit(1);
 		}

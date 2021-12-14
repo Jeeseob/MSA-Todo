@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
         } 
 
         while (!g_queue_is_empty(queue)) {
-                printf("%s\n", (char*)g_queue_pop_heaed(queue));
+                printf("%s\n", (char*)g_queue_pop_head(queue));
         }
 
 

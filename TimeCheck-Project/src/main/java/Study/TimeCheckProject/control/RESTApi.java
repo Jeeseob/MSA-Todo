@@ -1,4 +1,4 @@
-package Study.TimeCheckProject;
+package Study.TimeCheckProject.control;
 
 import Study.TimeCheckProject.timeCheckRepository.MemoryTimeCheckRepository;
 import Study.TimeCheckProject.timeCheckRepository.TimeCheck;

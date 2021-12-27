@@ -1,4 +1,6 @@
-package Study.TimeCheckProject.timeCheckRepository;
+package Study.TimeCheckProject.repository.timeCheckRepository;
+
+import Study.TimeCheckProject.member.TimeCheck;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

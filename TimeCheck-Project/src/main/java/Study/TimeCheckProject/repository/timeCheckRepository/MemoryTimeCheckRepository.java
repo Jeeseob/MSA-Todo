@@ -1,9 +1,12 @@
-package Study.TimeCheckProject.timeCheckRepository;
+package Study.TimeCheckProject.repository.timeCheckRepository;
+
+import Study.TimeCheckProject.member.TimeCheck;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+// None User 유저와 관련없는 Memory 기반 초기 코드
 public class MemoryTimeCheckRepository implements TimeCheckRepository<TimeCheck>{
     ArrayList<TimeCheck> timeList;
 

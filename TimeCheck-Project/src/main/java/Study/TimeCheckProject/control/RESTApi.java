@@ -1,14 +1,12 @@
 package Study.TimeCheckProject.control;
 
-import Study.TimeCheckProject.timeCheckRepository.MemoryTimeCheckRepository;
-import Study.TimeCheckProject.timeCheckRepository.TimeCheck;
-import Study.TimeCheckProject.timeCheckRepository.TimeCheckRepository;
-import org.springframework.http.converter.json.GsonBuilderUtils;
+import Study.TimeCheckProject.repository.timeCheckRepository.MemoryTimeCheckRepository;
+import Study.TimeCheckProject.member.TimeCheck;
+import Study.TimeCheckProject.repository.timeCheckRepository.TimeCheckRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 
 @RestController

@@ -21,7 +21,7 @@ public class User {
     private String email;
 
     private String token;
-    private ArrayList<TimeCheck> timeChecks;
-    private ArrayList<TodoList> todoLists;
+//    private ArrayList<TimeCheck> timeChecks;
+//    private ArrayList<TodoList> todoLists;
 //    private ArrayList<CompltedTodoList> compltedTodoLists;
 }

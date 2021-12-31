@@ -1,4 +1,4 @@
-package Study.TimeCheckProject.config;
+package Study.TimeCheckProject.service;
 
 import Study.TimeCheckProject.member.User;
 import lombok.RequiredArgsConstructor;

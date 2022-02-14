@@ -7,7 +7,8 @@ import java.util.Optional;
 
 @Transactional
 public interface TodoService {
-    public Long addTodo(Todo todo);
-    public List<Todo> findTodoList();
-    public Optional<Todo> findTodoById(Long id);
+    public Long setTodo(Todo todo);
+    public List<Todo> getTodoList();
+    public Optional<Todo> getTodo(Long id);
+    public void deleteTodo(Long id);
 }

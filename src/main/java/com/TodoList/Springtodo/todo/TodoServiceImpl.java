@@ -1,8 +1,11 @@
 package com.TodoList.Springtodo.todo;
 
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class TodoServiceImpl implements TodoService {
 
     private final TodoRepository todoRepository;
@@ -11,19 +14,24 @@ public class TodoServiceImpl implements TodoService {
         this.todoRepository = todoRepository;
     }
 
-    public Long addTodo(Todo todo) {
+    public Long setTodo(Todo todo) {
         todoRepository.save(todo);
         return todo.getId();
     }
 
     @Override
-    public List<Todo> findTodoList() {
+    public List<Todo> getTodoList() {
         return todoRepository.findAll();
     }
 
     @Override
-    public Optional<Todo> findTodoById(Long id) {
+    public Optional<Todo> getTodo(Long id) {
         return todoRepository.findById(id);
+    }
+
+    @Override
+    public void deleteTodo(Long id) {
+        todoRepository.deleteById(id);
     }
 
 //    public Optional<Todo> findByMemeber(Long memberId) {

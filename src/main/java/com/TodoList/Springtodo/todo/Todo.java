@@ -32,4 +32,14 @@ public class Todo {
         this.content = content;
         this.progress = Progress.BEFORESTART;
     }
+
+    public Boolean todoUpdate(Long id, Todo todo) {
+        if(id == todo.getId()) {
+            this.title = todo.getTitle();
+            this.content = todo.getContent();
+            this.progress = todo.getProgress();
+            return true;
+        }
+        return false;
+    }
 }

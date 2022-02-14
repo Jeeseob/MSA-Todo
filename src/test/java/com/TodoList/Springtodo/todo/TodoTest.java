@@ -32,15 +32,9 @@ public class TodoTest {
     public void getTodoTest() {
         // GIVEN
         Todo todo = addTodo();
-        System.out.println(todo.getId());
-        System.out.println(todo.getTitle());
-        System.out.println(todo.getContent());
-        System.out.println(todo.getProgress());
-
-        Long id = todo.getId();
 
         // WHEN
-        Optional<Todo> savedTodo = todoRepository.findById(id);
+        Optional<Todo> savedTodo = todoRepository.findById(todo.getId());
 
         // THEN
         Assertions.assertThat(savedTodo.isPresent()).isEqualTo(true);

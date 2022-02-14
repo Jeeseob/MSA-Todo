@@ -1,5 +1,6 @@
 package com.TodoList.Springtodo.controller;
 
+import com.TodoList.Springtodo.todo.Progress;
 import com.TodoList.Springtodo.todo.Todo;
 import com.TodoList.Springtodo.todo.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class TodoController {
         return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
     }
 
-    // update
+    // update (전체 내용 수정)
     @PutMapping("/{id}")
     public ResponseEntity<String> updateTodo(@PathVariable("id") Long id,  @RequestBody Todo todo) throws Exception {
         Optional<Todo> todoOptional = todoService.getTodo(id);
@@ -39,6 +40,17 @@ public class TodoController {
             if(todoOptional.get().todoUpdate(id, todo)) {
                 return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
             }
+        }
+        return new ResponseEntity<String>("BADREQUEST", HttpStatus.BAD_REQUEST);
+    }
+
+    // update(Progress만 수정, 체크 표시)
+    @PutMapping("/{id}/{progress}")
+    public ResponseEntity<String> updateProgressTodo(@PathVariable("id") Long id, @PathVariable("progress")Progress progress) throws Exception {
+        Optional<Todo> todoOptional = todoService.getTodo(id);
+        if (todoOptional.isPresent()) {
+            todoOptional.get().setProgress(progress);
+            return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
         }
         return new ResponseEntity<String>("BADREQUEST", HttpStatus.BAD_REQUEST);
     }

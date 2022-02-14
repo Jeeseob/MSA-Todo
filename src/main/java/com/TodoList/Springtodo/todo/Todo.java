@@ -33,6 +33,7 @@ public class Todo {
         this.progress = Progress.BEFORESTART;
     }
 
+    // 데이터 수정시 사용되는 logic
     public Boolean todoUpdate(Long id, Todo todo) {
         if(id == todo.getId()) {
             this.title = todo.getTitle();

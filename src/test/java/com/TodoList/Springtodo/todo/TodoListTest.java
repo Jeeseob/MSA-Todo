@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @DataJpaTest
 public class TodoListTest {
@@ -32,7 +33,7 @@ public class TodoListTest {
     List<Todo> savedtodoList = new ArrayList<>();
 
     @Test
-    public void getTodoListTest() {
+    public void TodoList저장하기() {
         // GIVEN
         for (int i = 0; i < 5; i++) {
             savedtodoList.add(addTodo(i));
@@ -45,5 +46,18 @@ public class TodoListTest {
         Assertions.assertThat(savedtodoList).isEqualTo(todoList);
     }
 
+    @Test
+    public void TodoList확인하기() {
+        // GIVEN
+        for (int i = 1; i < 5; i++) {
+            savedtodoList.add(addTodo(i));
+        }
+        // WHEN
+        Optional<Todo> todoOptional = todoRepository.findById(1L);
+
+        // THEN
+        System.out.println(todoOptional.get().getTitle());
+        Assertions.assertThat(todoOptional.get().getTitle()).isEqualTo(title + 1);
+    }
 }
 

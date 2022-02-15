@@ -35,3 +35,7 @@ out/
 
 ### VS Code ###
 .vscode/
+
+## 추가 설정
+application-oauth.properties
+application.properties

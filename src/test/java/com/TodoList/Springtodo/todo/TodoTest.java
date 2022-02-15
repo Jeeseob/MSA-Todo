@@ -29,7 +29,7 @@ public class TodoTest {
     }
 
     @Test
-    public void getTodoTest() {
+    public void Todo저장하기() {
         // GIVEN
         Todo todo = addTodo();
 
@@ -47,7 +47,7 @@ public class TodoTest {
     }
 
     @Test
-    public void deleteTodoTest() {
+    public void Todo삭제하기() {
         // GIVEN
         Todo todo = addTodo();
         Long id = todo.getId();

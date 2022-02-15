@@ -1,5 +1,7 @@
-package com.TodoList.Springtodo.todo;
+package com.TodoList.Springtodo.service.todo;
 
+import com.TodoList.Springtodo.domain.todo.Todo;
+import com.TodoList.Springtodo.domain.todo.TodoRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.TodoList.Springtodo.todo;
+package com.TodoList.Springtodo.domain.todo;
 
 public enum Progress {
     BEFORESTART, PROCEEDING, COMPLETE

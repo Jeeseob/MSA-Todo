@@ -1,8 +1,8 @@
 package com.TodoList.Springtodo.controller;
 
-import com.TodoList.Springtodo.todo.Progress;
-import com.TodoList.Springtodo.todo.Todo;
-import com.TodoList.Springtodo.todo.TodoService;
+import com.TodoList.Springtodo.domain.todo.Progress;
+import com.TodoList.Springtodo.domain.todo.Todo;
+import com.TodoList.Springtodo.service.todo.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

@@ -1,4 +1,4 @@
-package com.TodoList.Springtodo;
+package com.TodoList.Springtodo.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

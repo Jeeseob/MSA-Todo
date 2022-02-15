@@ -1,5 +1,7 @@
-package com.TodoList.Springtodo.todo;
+package com.TodoList.Springtodo.service;
 
+import com.TodoList.Springtodo.domain.todo.Todo;
+import com.TodoList.Springtodo.domain.todo.TodoRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

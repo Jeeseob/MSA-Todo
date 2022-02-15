@@ -1,5 +1,6 @@
-package com.TodoList.Springtodo.todo;
+package com.TodoList.Springtodo.service.todo;
 
+import com.TodoList.Springtodo.domain.todo.Todo;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;

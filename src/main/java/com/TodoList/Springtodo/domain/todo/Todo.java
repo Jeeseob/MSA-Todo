@@ -1,5 +1,6 @@
-package com.TodoList.Springtodo.todo;
+package com.TodoList.Springtodo.domain.todo;
 
+import com.TodoList.Springtodo.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ import javax.persistence.Id;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Todo {
+public class Todo extends BaseTimeEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) //DB가 PK를 알아서 생성.
     private Long id; // 데이터 id (pk)

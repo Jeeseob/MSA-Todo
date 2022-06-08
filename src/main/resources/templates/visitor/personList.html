@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<body>
+
+<div class="container">
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>방송 명</th>
+                <th>이름</th>
+                <th>소속</th>
+                <th>직위</th>
+                <th>참고사항</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="personProgram : ${personProgramList}">
+                <td th:text="${personProgram.program.name}"></td>
+                <td th:text="${personProgram.person.name}"></td>
+                <td th:text="${personProgram.person.organization}"></td>
+                <td th:text="${personProgram.person.position}"></td>
+                <td th:text="${personProgram.person.remark}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

@@ -7,6 +7,6 @@ INSERT INTO PROGRAM (name, type, start_time, end_time) VALUES ('안녕다큐', '
 INSERT INTO PROGRAM (name, type, start_time, end_time) VALUES ('asdg', 'sdgf', '11:30:00.000', '13:30:00.000');
 INSERT INTO PROGRAM (name, type, start_time, end_time) VALUES ('asdg', 'asd', '16:30:00.000', '17:30:00.000');
 
-INSERT INTO PERSON_PROGRAM (local_date_time, person_id, program_id) VALUES ('2022-01-01 16:00:00', 1, 1);
-INSERT INTO PERSON_PROGRAM (local_date_time, person_id, program_id) VALUES ('2022-01-01 16:30:00', 1, 3);
-INSERT INTO PERSON_PROGRAM (local_date_time, person_id, program_id) VALUES ('2022-01-01 15:00:00', 1, 2);
+INSERT INTO PERSON_PROGRAM (local_date, person_id, program_id) VALUES ('2022-01-01', 1, 1);
+INSERT INTO PERSON_PROGRAM (local_date, person_id, program_id) VALUES ('2022-01-01', 1, 3);
+INSERT INTO PERSON_PROGRAM (local_date, person_id, program_id) VALUES ('2022-01-01', 1, 2);

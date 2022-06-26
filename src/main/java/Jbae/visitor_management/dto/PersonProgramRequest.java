@@ -1,6 +1,8 @@
 package Jbae.visitor_management.dto;
 
 import lombok.Data;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -10,7 +12,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class PersonProgramRequest {
-    private LocalDateTime localDateTime;
+    private LocalDate localDate;
 
     private Long personId;
     private Long programId;

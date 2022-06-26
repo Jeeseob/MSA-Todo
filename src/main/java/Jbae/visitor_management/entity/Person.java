@@ -24,9 +24,8 @@ public class Person {
     private String name;
     private String organization;
     private String position;
-
     private String remark;
 
-    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "person")
     private Set<PersonProgram> personPrograms = new HashSet<>();
 }

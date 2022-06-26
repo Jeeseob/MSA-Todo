@@ -22,7 +22,7 @@ public class PersonProgramToEntity {
 
     public PersonProgram toEntity(PersonProgramRequest request) {
         return  PersonProgram.builder()
-                .localDateTime(request.getLocalDateTime())
+                .localDate(request.getLocalDate())
                 .person(personService.getPerson(request.getPersonId()))
                 .program(programService.getProgram(request.getProgramId()))
                 .build();

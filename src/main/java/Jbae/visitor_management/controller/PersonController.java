@@ -36,9 +36,9 @@ public class PersonController {
 
     @PostMapping("/person/add")
     ModelAndView addPerson(@ModelAttribute("person") PersonRequest request) {
-        ModelAndView mav = new ModelAndView("redirect:/person/list");
+        ModelAndView modelAndView = new ModelAndView("redirect:/person/list");
         personService.setRequest(request);
-        return mav;
+        return modelAndView;
     }
 
     @RequestMapping("person/form")

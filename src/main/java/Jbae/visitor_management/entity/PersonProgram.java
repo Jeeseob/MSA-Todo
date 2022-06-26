@@ -1,9 +1,9 @@
 package Jbae.visitor_management.entity;
 
-import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -21,13 +21,11 @@ public class PersonProgram {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime localDateTime;
-
+    private LocalDate localDate;
 
     @ManyToOne
     @JoinColumn(name = "person_id")
     private Person person;
-
 
     @ManyToOne
     @JoinColumn(name = "program_id")

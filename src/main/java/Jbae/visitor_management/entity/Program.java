@@ -1,10 +1,10 @@
 package Jbae.visitor_management.entity;
 
 import lombok.*;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -24,11 +24,10 @@ public class Program {
 
     private String name;
     private String type;
-
     private LocalTime startTime;
     private LocalTime endTime;
 
+
     @OneToMany(mappedBy = "program")
-    @Nullable
-    private Set<PersonProgram> personPrograms;
+    private List<PersonProgram> personPrograms;
 }

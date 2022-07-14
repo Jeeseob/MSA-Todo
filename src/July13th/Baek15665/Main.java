@@ -8,7 +8,7 @@ import java.util.*;
 /**
  * @Author : Jeeseob
  * @CreateAt : 2022/07/13
- * @Problem : N과 M(9) : https://www.acmicpc.net/problem/15663
+ * @Problem : N과 M(11) : https://www.acmicpc.net/problem/15665
  */
 
 public class Main {

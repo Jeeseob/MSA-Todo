@@ -1,21 +1,23 @@
-package July13th.Baek15654;
+package week1.July13th.Baek15663;
 
-import java.io.*;
-import java.util.Arrays;
-import java.util.StringTokenizer;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
 
 /**
  * @Author : Jeeseob
  * @CreateAt : 2022/07/13
- * @Problem : N과 M(7) : https://www.acmicpc.net/problem/15655
+ * @Problem : N과 M(9) : https://www.acmicpc.net/problem/15663
  */
 
 public class Main {
-    private static int[] answer;
+    private static boolean[] visited;
+    private static LinkedHashSet<String> answer;
+    private static int[] tempAnswer;
     private static int[] numbers;
     private static int N;
     private static int M;
-    private static StringBuilder stringBuilder;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -34,26 +36,38 @@ public class Main {
         // 받은 데이터를 정렬하여 처리
         Arrays.sort(numbers);
 
-        // 정답처리용 Array
-        answer = new int[M];
+        // 방문체크용 Array 초기화
+        visited = new boolean[N+1];
+        Arrays.fill(visited,false);
 
-        stringBuilder = new StringBuilder();
+        // 정답처리용 Array
+        tempAnswer = new int[M];
+
+        // 중복처리용 HashSet
+        answer = new LinkedHashSet<>();
+
         dfs(0);
-        System.out.println(stringBuilder.toString());
+        answer.forEach(System.out::println);
     }
+
     public static void dfs(int depth) throws IOException {
         if (depth == M) {
-            for (int temp : answer) {
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int temp : tempAnswer) {
                 stringBuilder.append(temp).append(" ");
             }
-            stringBuilder.append('\n');
+            answer.add(stringBuilder.toString());
             return;
         }
 
         // 방문한적 없는 index 중 가장 먼저 처리
         for (int i = 0; i < N; i++) {
-            answer[depth] = numbers[i];
-            dfs(depth + 1);
+            if(!visited[i]) {
+                visited[i] = true;
+                tempAnswer[depth] = numbers[i];
+                dfs(depth + 1);
+                visited[i] = false; // 다음 연산을 위해 초기화
+            }
         }
     }
 }

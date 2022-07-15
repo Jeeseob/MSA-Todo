@@ -1,4 +1,4 @@
-package July13th.Baek15663;
+package week1.July13th.Baek15665;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,11 +8,10 @@ import java.util.*;
 /**
  * @Author : Jeeseob
  * @CreateAt : 2022/07/13
- * @Problem : N과 M(9) : https://www.acmicpc.net/problem/15663
+ * @Problem : N과 M(11) : https://www.acmicpc.net/problem/15665
  */
 
 public class Main {
-    private static boolean[] visited;
     private static LinkedHashSet<String> answer;
     private static int[] tempAnswer;
     private static int[] numbers;
@@ -36,10 +35,6 @@ public class Main {
         // 받은 데이터를 정렬하여 처리
         Arrays.sort(numbers);
 
-        // 방문체크용 Array 초기화
-        visited = new boolean[N+1];
-        Arrays.fill(visited,false);
-
         // 정답처리용 Array
         tempAnswer = new int[M];
 
@@ -62,12 +57,8 @@ public class Main {
 
         // 방문한적 없는 index 중 가장 먼저 처리
         for (int i = 0; i < N; i++) {
-            if(!visited[i]) {
-                visited[i] = true;
-                tempAnswer[depth] = numbers[i];
-                dfs(depth + 1);
-                visited[i] = false; // 다음 연산을 위해 초기화
-            }
+            tempAnswer[depth] = numbers[i];
+            dfs(depth + 1);
         }
     }
 }

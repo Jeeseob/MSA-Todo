@@ -1,4 +1,4 @@
-package July13th.Baek15651;
+package week1.July13th.Baek15651;
 
 import java.io.*;
 import java.util.StringTokenizer;

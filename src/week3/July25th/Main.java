@@ -5,36 +5,62 @@ import java.util.*;
 
 /**
  * @Author : Jeeseob
- * @CreateAt : 2022/07/21
- * @Problem : 수 이어가기 : https://www.acmicpc.net/problem/2635
+ * @CreateAt : 2022/07/24
+ * @Problem : 체스판 다시 칠하기 : https://www.acmicpc.net/problem/1018
  */
 
 public class Main {
+
+    private static char[][] inputBoard;
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int N = Integer.parseInt(br.readLine());
-        ArrayList<Integer> maxNumbers = new ArrayList<>();
-        int maxCount = 0;
+        StringTokenizer stringTokenizer = new StringTokenizer(br.readLine(), " ");
+        int N = Integer.parseInt(stringTokenizer.nextToken());
+        int M = Integer.parseInt(stringTokenizer.nextToken());
+        inputBoard = new char[N][M];
 
-        for (int i = N; i >= N/2; i--) {
-            ArrayList<Integer> tempNumbers = new ArrayList<>();
-            tempNumbers.add(N);
-            tempNumbers.add(i);
-
-            while (true) {
-                int temp = tempNumbers.get(tempNumbers.size()-2) - tempNumbers.get(tempNumbers.size()-1);
-                if (temp < 0) break;
-                tempNumbers.add(temp);
-            }
-
-            if (maxCount < tempNumbers.size()) {
-                maxCount = tempNumbers.size();
-                maxNumbers = tempNumbers;
+        for (int i = 0; i < N; i++) {
+            String row = br.readLine();
+            for (int j = 0; j < M; j++) {
+                inputBoard[i][j] = row.charAt(j);
             }
         }
 
-        System.out.println(maxCount);
-        maxNumbers.forEach(i -> System.out.print(i + " "));
+        int result = 64;
+        for (int i = 0; i < N; i++) {
+            if (!(N - i < 8)) {
+                for (int j = 0; j < M; j++) {
+                    if (!(M - j < 8)) {
+                        int tmpMin = changeColor(i, j);
+                        result = Math.min(tmpMin, result);
+                    }
+                }
+            }
+        }
+        System.out.println(result);
+    }
+
+    public static int changeColor(int row, int column) {
+        char first = inputBoard[row][column];
+        int count = 0;
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if((i + j) % 2 == 0) {
+                    // 색깔이 같아야 하는 경우
+                    if(inputBoard[i + row][j + column] != first) {
+                        count++;
+                    }
+                } else {
+                    // 색깔이 달라야 하는 경우
+                    if(inputBoard[i + row][j + column] == first) {
+                        count++;
+                    }
+                }
+            }
+        }
+        count = Math.min(count, 64-count);
+        return count;
     }
 }

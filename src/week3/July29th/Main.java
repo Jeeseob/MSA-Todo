@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 /**
  * @Author : Jeeseob
  * @CreateAt : 2022/07/27
- * @Problem : 부등호 : https://www.acmicpc.net/problem/2529
+ * @Problem : 숫자야구 : https://www.acmicpc.net/problem/2503
  */
 
 public class Main {

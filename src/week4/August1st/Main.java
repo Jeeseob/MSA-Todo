@@ -58,7 +58,6 @@ public class Main {
             if (arr[temp][i] == 1)
                 dfs(i);
         }
-
     }
 
     public static void bfs() {

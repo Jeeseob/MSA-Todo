@@ -1,0 +1,39 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.6'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'Study'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	//JPA 사용을 위한 라이브러리
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	// response를 json 형식으로 변환하기 위한 라이브러리
+	implementation 'com.google.code.gson:gson:2.8.6'
+
+	// DB사용을 위한 라이브러리
+	implementation 'com.h2database:h2'
+	// runtimeOnly 'mysql:mysql-connector-java'
+
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+	implementation 'org.projectlombok:lombok'
+
+	// application.properties 보안을 위한 암호화 라이브러리
+	// implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4'
+}
+
+test {
+	useJUnitPlatform()
+}

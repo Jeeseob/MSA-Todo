@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Person Info</title>
+    <style>
+        span {
+            display: inline-block;
+            width: 120px;
+            margin-top: 15px;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<form action="add", method="post">
+    <span>성명</span>
+    <input type="text" th:field="${person.name}" /> <br />
+    <span>소속</span>
+    <input type="text" th:field="${person.organization}" /> <br />
+    <span>직위</span>
+    <input type="text" th:field="${person.position}" /> <br />
+    <span>이력 및 참고사항</span>
+    <input type="text" th:field="${person.remark}" /> <br />
+
+    <input type="submit" />
+</form>
+</body>
+</html>

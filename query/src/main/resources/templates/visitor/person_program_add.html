@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Add Person Info</title>
+        <style>
+            span {
+                display: inline-block;
+                width: 120px;
+                margin-top: 15px;
+                margin-left: 10px;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+
+    <body>
+        <form action="add", method="post">
+            <span>성명</span>
+            <h4 th:field="${person-program.personId} th:text="${person.name}"></h4><br />
+            <span>방문일</span>
+            <input type="date" th:field="${person-program.date}" /> <br />
+            <span>프로그램</span>
+            <form>
+                <select name="program" th:each="program : ${programList}">
+                    <option th:field="${person-program.programId}" th:value="${program.id}" th:text="${program.name}"></option>
+                </select>
+            </form>
+            <input type="submit" />
+        </form>
+    </body>
+</html>

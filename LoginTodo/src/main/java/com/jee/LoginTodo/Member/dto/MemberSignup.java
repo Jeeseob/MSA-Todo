@@ -1,4 +1,4 @@
-package com.jee.LoginTodo.user.dto;
+package com.jee.LoginTodo.Member.dto;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -14,7 +14,7 @@ import lombok.ToString;
 @Setter
 @Builder
 @ToString
-public class UserSignup {
+public class MemberSignup {
     private String email;
     private String password1;
     private String password2;

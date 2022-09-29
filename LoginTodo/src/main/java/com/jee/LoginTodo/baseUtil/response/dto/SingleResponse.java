@@ -11,8 +11,6 @@ import lombok.ToString;
  */
 
 @Getter
-@Setter
-@ToString
 @RequiredArgsConstructor
 public class SingleResponse<T> extends CommonResponse {
     private T data;

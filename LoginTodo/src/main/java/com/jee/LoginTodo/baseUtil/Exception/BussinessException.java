@@ -9,5 +9,4 @@ public class BussinessException extends RuntimeException{
     public BussinessException(ExMessage exMessage) {
         super(exMessage.getMessage());
     }
-
 }

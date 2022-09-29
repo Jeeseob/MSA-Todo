@@ -13,8 +13,6 @@ import java.util.List;
  */
 
 @Getter
-@Setter
-@ToString
 @RequiredArgsConstructor
 public class ListResponse<T> extends CommonResponse {
     private List<T> dataList;

@@ -1,6 +1,6 @@
-package com.jee.LoginTodo.user.entity;
+package com.jee.LoginTodo.Member.entity;
 
-import com.jee.LoginTodo.user.dto.UserResponse;
+import com.jee.LoginTodo.Member.dto.MemberResponse;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -17,9 +17,9 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Builder
-@ToString
 @RequiredArgsConstructor
-public class User {
+@AllArgsConstructor
+public class Member {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -34,8 +34,8 @@ public class User {
     @LastModifiedDate
     private LocalDateTime updateAt;
 
-    public UserResponse toResponse() {
-        return UserResponse.builder()
+    public MemberResponse toResponse() {
+        return MemberResponse.builder()
                 .id(this.id)
                 .email(this.email)
                 .userName(this.userName)

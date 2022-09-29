@@ -1,8 +1,6 @@
-package com.jee.LoginTodo.user.dto;
+package com.jee.LoginTodo.Member.dto;
 
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * @Author : Jeeseob
@@ -10,7 +8,7 @@ import lombok.Setter;
  */
 
 @Builder
-public class UserResponse {
+public class MemberResponse {
     private Long id;
     private String email;
     private String userName;

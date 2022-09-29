@@ -1,13 +1,12 @@
-package com.jee.LoginTodo.user.service;
+package com.jee.LoginTodo.Member.service;
 
 import com.jee.LoginTodo.baseUtil.Exception.BussinessException;
 import com.jee.LoginTodo.baseUtil.Exception.ExMessage;
-import com.jee.LoginTodo.baseUtil.response.service.ResponseService;
-import com.jee.LoginTodo.user.dto.UserLogin;
-import com.jee.LoginTodo.user.dto.UserResponse;
-import com.jee.LoginTodo.user.dto.UserSignup;
-import com.jee.LoginTodo.user.entity.User;
-import com.jee.LoginTodo.user.repository.UserRepository;
+import com.jee.LoginTodo.Member.dto.MemberLogin;
+import com.jee.LoginTodo.Member.dto.MemberResponse;
+import com.jee.LoginTodo.Member.dto.MemberSignup;
+import com.jee.LoginTodo.Member.entity.Member;
+import com.jee.LoginTodo.Member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,26 +20,26 @@ import java.util.regex.Pattern;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class MemberService {
 
-    private final UserRepository userRepository;
+    private final MemberRepository memberRepository;
 
-    public void signUp(UserSignup userSignup) throws Exception {
+    public void signUp(MemberSignup memberSignup) throws Exception {
         try {
-            this.isVaild(userSignup);
-            User user = User.builder()
-                    .email(userSignup.getEmail())
-                    .password(userSignup.getPassword1())
-                    .userName(userSignup.getUserName()).build();
+            this.isVaild(memberSignup);
+            Member user = Member.builder()
+                    .email(memberSignup.getEmail())
+                    .password(memberSignup.getPassword1())
+                    .userName(memberSignup.getUserName()).build();
 
-            userRepository.save(user);
+            memberRepository.save(user);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
 
-    public UserResponse login(UserLogin userLogin) {
-        Optional<User> optionalUser = userRepository.findByEmailAndPassword(userLogin.getEmail(), userLogin.getPassword());
+    public MemberResponse login(MemberLogin memberLogin) {
+        Optional<Member> optionalUser = memberRepository.findByEmailAndPassword(memberLogin.getEmail(), memberLogin.getPassword());
         if (optionalUser.isPresent()) {
             return optionalUser.get().toResponse();
         }
@@ -52,16 +51,16 @@ public class UserService {
     }
 
     // id, password 기준에 맞춘다.
-    private void isVaild(UserSignup userSignup) {
-        this.isVaildEmail(userSignup.getEmail());
-        this.isVaildPassword(userSignup.getPassword1(), userSignup.getPassword2());
+    private void isVaild(MemberSignup memberSignup) {
+        this.isVaildEmail(memberSignup.getEmail());
+        this.isVaildPassword(memberSignup.getPassword1(), memberSignup.getPassword2());
     }
 
     private void isVaildEmail(String email) {
         Pattern emailPattern = Pattern.compile("^(.+)@(.+)$");
         if(!emailPattern.matcher(email).matches()) {
             throw new BussinessException(ExMessage.EMAIL_PATTERN_INCONSISTENCY);
-        } else if (userRepository.findByEmail(email).isPresent()) {
+        } else if (memberRepository.findByEmail(email).isPresent()) {
             throw new BussinessException(ExMessage.EMAIL_ALREADY_EXIST);
         }
     }

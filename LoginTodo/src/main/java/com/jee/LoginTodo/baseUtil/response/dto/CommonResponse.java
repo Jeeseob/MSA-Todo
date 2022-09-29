@@ -11,7 +11,6 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
 public class CommonResponse {
     private int code;
     private String message;
